@@ -2,7 +2,6 @@ package Experiment6;
 
 
 import java.util.ArrayList;
-import java.util.Objects;
 import java.util.Scanner;
 
 interface LibraryItem {
@@ -62,6 +61,7 @@ class Book implements LibraryItem {
             if (book.ISBN == checkoutISBN) {
                 checkedOutBooks.add(book);
                 bookArrayList.remove(book);
+                System.out.println("The item has been checked out successfully");
                 return;
             }
         }
@@ -85,9 +85,9 @@ class Book implements LibraryItem {
     public void createnewItem(int newISBN) {
         Book newBook = new Book();
         newBook.setISBN(newISBN);
-        io.nextLine();
         System.out.println("Enter the title of the book --> ");
         newBook.setTitle(io.next());
+        io.nextLine();
         System.out.println("Enter the name of author --> ");
         newBook.setAuthor(io.nextLine());
         bookArrayList.add(newBook);
@@ -121,7 +121,7 @@ class Book implements LibraryItem {
 
     private boolean searchByattribute(String searchAuthor) {
         for (Book book : bookArrayList) {
-            if (Objects.equals(book.author, searchAuthor)) {
+            if (book.author.equals(searchAuthor)) {
                 book.displayInfo();
                 return true;
             }
@@ -133,7 +133,9 @@ class Book implements LibraryItem {
     public boolean isAvailable() {
         System.out.println("Which criteria do you want to search in ? ");
         System.out.println("1.Title\t2.Author name\t3.ISBN");
-        switch (io.nextInt()) {
+        int option = io.nextInt();
+        io.nextLine();
+        switch (option) {
             case 1 -> {
                 System.out.println("Enter the title of the book ");
                 return searchByattribute(-1, io.next());
@@ -194,6 +196,7 @@ class DVD implements LibraryItem {
             if (dvd.getReleaseYear() == checkoutItem) {
                 checkedOutDVDs.add(dvd);
                 dvdList.remove(dvd);
+                System.out.println("Successfully checked out Item");
                 return;
             }
         }
@@ -250,7 +253,7 @@ class DVD implements LibraryItem {
 
     private boolean searchByAttribute(String searchDirector) {
         for (DVD dvd : dvdList) {
-            if (Objects.equals(dvd.getDirector(), searchDirector)) {
+            if (searchDirector.equals(dvd.director)) {
                 dvd.displayInfo();
                 return true;
             }
@@ -290,7 +293,6 @@ public class _question4 {
     public static void main(String[] args) {
         System.out.println("Welcome to the Library System!");
 
-        // Populate sample data
         addSampleBooks();
         addSampleDVDs();
 
@@ -327,7 +329,7 @@ public class _question4 {
         System.out.println("4. Search for Books");
 
         int option = scanner.nextInt();
-        scanner.nextLine(); // Consume the newline character
+//        scanner.nextLine(); // Consume the newline character
 
         switch (option) {
             case 1:
