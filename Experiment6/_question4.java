@@ -219,6 +219,7 @@ class DVD implements LibraryItem {
     public void createnewItem(int newReleaseYear) {
         DVD newDVD = new DVD();
         newDVD.setReleaseYear(newReleaseYear);
+        scanner.nextLine();
         System.out.println("Enter the title of the DVD: ");
         newDVD.setTitle(scanner.nextLine());
         System.out.println("Enter the name of the director: ");
@@ -265,13 +266,16 @@ class DVD implements LibraryItem {
         System.out.println("Which criteria do you want to search by?");
         System.out.println("1. Title\t2. Director\t3. Release Year");
         int searchOption = scanner.nextInt();
+
         switch (searchOption) {
             case 1 -> {
                 System.out.println("Enter the title of the DVD: ");
-                return searchByAttribute(-1, scanner.next());
+                scanner.nextLine();// consume new line character
+                return searchByAttribute(-1, scanner.nextLine());
             }
             case 2 -> {
                 System.out.println("Enter the name of the director: ");
+                scanner.nextLine();// consume new line character
                 return searchByAttribute(scanner.nextLine());
             }
             case 3 -> {
