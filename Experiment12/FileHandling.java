@@ -14,7 +14,7 @@ public class FileHandling{
 			byte[] b = Str.getBytes();
 			fout.write(b);
 			fout.close();
-			fin.close();		
+			fin.close();
 		}
 		catch(Exception e){
 			System.out.println(e);
